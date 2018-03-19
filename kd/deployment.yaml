@@ -125,6 +125,21 @@ spec:
           limits:
             memory: 256Mi
             cpu: 100m
+      containers:
+        - name: redis
+          image: quay.io/ukhomeofficedigital/redis:v0.1.1
+          ports:
+            - containerPort: 6379
+          env:
+            - name: REDIS_PASSWORD
+              value: password
+          command: ['/usr/bin/bash']
+          args: ['-c', 'echo "requirepass ${REDIS_PASSWORD}" >> /etc/redis.conf && /run.sh']
+          volumeMounts:
+            - mountPath: /var/lib/redis
+              name: data
+          securityContext:
+            runAsNonRoot: true
       - name: pttg-rps-contact
         image: quay.io/ukhomeofficedigital/pttg-rps-contact:{{.VERSION}}
         imagePullPolicy: Always
@@ -174,6 +189,8 @@ spec:
             name: certs
             readOnly: true
       volumes:
+        - name: data
+          emptyDir: {}
         - name: certs
           emptyDir:
             medium: "Memory"
