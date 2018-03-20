@@ -128,8 +128,8 @@ spec:
         env:
           - name: REDIS_PASSWORD
             value: password
-        command: ['/usr/bin/bash']
-        args: ['-c', 'echo "requirepass ${REDIS_PASSWORD}" >> /etc/redis.conf && /run.sh']
+#        command: ['/usr/bin/bash']
+#        args: ['-c', 'echo "requirepass ${REDIS_PASSWORD}" >> /etc/redis.conf && /run.sh']
         volumeMounts:
           - mountPath: /var/lib/redis
             name: data
