@@ -161,7 +161,7 @@ spec:
             containerPort: 8080
         livenessProbe:
           httpGet:
-            path: /ping
+            path: /public/images/ping.gif
             port: http
             httpHeaders:
               - name: X-probe
@@ -171,7 +171,7 @@ spec:
           timeoutSeconds: 10
         readinessProbe:
             httpGet:
-              path: /healthz
+              path: /public/images/healthz.gif
               port: http
               httpHeaders:
                 - name: X-probe
